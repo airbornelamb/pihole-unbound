@@ -15,4 +15,4 @@ RUN unbound-anchor \
     && unbound-checkconf
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["unbound"]
+CMD ["/sbin/unbound"]
