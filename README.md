@@ -1,20 +1,11 @@
 # docker-unbound
 
-[![Docker Repository on Quay](https://quay.io/repository/ssro/docker-unbound/status "Docker Repository on Quay")](https://quay.io/repository/ssro/docker-unbound)
+This is a docker container that implements unbound on the local host. By default, it listens for queries on 127.0.0.1#3535 so you can run it on your pihole host and have it as the upstream server. Unbound will traverse authoritative nameservers to find the answer to queries, as well as maintain a cache.
 
-### "Quick and dirty" DNS cache server powered by Unbound on Docker
-
-![unbound](https://www.unbound.net/gx/unbound-250.png)
-![docker](https://www.docker.com/sites/default/files/vertical_large.png) 
+I chose port 3535 because 5353 would be preferred but it conflicts with Avahi on the docker host and I still want that to run.
 
 # How To Use:
 
-1. Clone the repo
-2. Make changes in `unbound.conf` to reflect your network setup and performance
-3. `docker build -t unbound-cache .`
-4. `docker run -d --name unbound  -p 53:53 -p 53:53/udp --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE unbound-cache`
-5. Change your DNS setting to point to your docker host
+One-off: `docker run -d -p 3535:3535/udp airbornelamb/pihole-unbound` and then input `127.0.0.1#3535` as your pihole upstream DNS provider
 
-For the lazy `docker run -d --name unbound  -p 53:53 -p 53:53/udp --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE quay.io/ssro/docker-unbound`
-
-Also for the lazy - unbound returns answers to queries from any IP (0.0.0.0/0) if it's used from quay.io. This shouldn't be a problem if you run it behind your firewall for your local LAN
+In a swarm stack: Checkout my full pihole-unbound config here https://raw.githubusercontent.com/airbornelamb/rpi/master/pihole-stack.yml
