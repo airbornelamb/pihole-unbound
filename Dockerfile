@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM arm32v6/alpine:latest
 
 LABEL maintainer="Josh Lamb"
 
