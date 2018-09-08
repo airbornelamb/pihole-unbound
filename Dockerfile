@@ -10,4 +10,4 @@ RUN apk add --no-cache unbound tini curl \
     && unbound-checkconf
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["/sbin/unbound"]
+CMD ["unbound"]
