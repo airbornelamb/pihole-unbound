@@ -4,6 +4,8 @@ This is a docker container that implements unbound on the local host. By default
 
 I chose port 3535 because 5353 would be preferred but it conflicts with Avahi on the docker host and I still want that to run.
 
+***This is not multi-arch. It only works on arm32v6 currently***. You can change this by downloading from the repo and changing the FROM reference to simply `alpine:latest` and building locally
+
 # How To Use:
 
 One-off: `docker run -d -p 3535:3535/udp airbornelamb/pihole-unbound` and then input `127.0.0.1#3535` as your pihole upstream DNS provider
